@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { TextField, Button, Link} from "@mui/material";
+
 // login function from firebase
 import { login } from "../util/firebaseFunctions";
 
@@ -52,27 +54,38 @@ const LoginForm = () => {
       <h1>Login</h1>
       <div className="loginFormContainer">
         <form onSubmit={handleSubmit} className="loginForm">
-          <input
+          <TextField
+            error
+            id="outlined-basic"
+            variant="outlined"
             className="loginInput"
             type="text"
             onChange={(e) => setemail(e.target.value)}
-            placeholder="email*"
+            placeholder="Email*"
             required
           />
-          <input
+          <TextField
+            error
+            id="outlined-basic"
             className="loginInput"
+            variant="outlined"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="password*"
+            placeholder="Password*"
             required
           />
-          <button className="submitButton" type="button" onClick={handleGuestSubmit}>
+          <Button
+            className="submitButton"
+            type="button"
+            variant="contained"
+            onClick={handleGuestSubmit}
+          >
             Guest Login
-          </button>
-          <input className="submitButton" type="submit" />
+          </Button>
+          <Button className="submitButton" variant="contained" type="submit">Log In</Button>
         </form>
       </div>
-      <a href="/signup">Don't have an account? Sign Up</a>
+      <Link href="/signup">Don't have an account? Sign Up</Link>
     </div>
   );
 };

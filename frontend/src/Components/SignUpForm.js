@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import { signUp } from "../util/firebaseFunctions";
 
+import { TextField, Button, Link } from "@mui/material";
+
 // css
-import "../styles/SignUp.css"
+import "../styles/SignUp.css";
 
 const SignUpForm = () => {
   const [fullName, setFullName] = useState("");
@@ -18,47 +20,54 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // fire signup firebase function
-    navigate("/feed");
+    if (password === confirmPassword) {
+      navigate("/feed");
+    }
   };
   return (
     <>
       <h1>Sign Up</h1>
       <div className="signupFormContainer">
         <form onSubmit={handleSubmit} className="signupForm">
-          <input
+          <TextField
             className="signupInput"
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="full name*"
+            placeholder="Full name*"
+            variant="outlined"
             required
           />
-          <input
+          <TextField
             className="signupInput"
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="username*"
+            placeholder="Username*"
+            variant="outlined"
             required
           />
-          <input
+          <TextField
             className="signupInput"
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="email*"
+            placeholder="Email*"
+            variant="outlined"
             required
           />
-          <input
+          <TextField
             className="signupInput"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="password*"
+            placeholder="Password*"
+            variant="outlined"
             required
           />
-          <input
+          <TextField
             className="signupInput"
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="confirm password*"
+            placeholder="Confirm password*"
+            variant="outlined"
             required
           />
-          <input type="submit" className="submitButton" />
+          <Button type="submit" variant="contained" className="submitButton">Sign Up</Button>
         </form>
       </div>
-      <a  href="/">Back to Login</a>
+      <Link href="/">Back to Login</Link>
     </>
   );
 };
