@@ -5,15 +5,15 @@ import axios from "axios";
 const FeedPosts = () => {
   const [posts, setPosts] = useState([]);
 
-  const API = apiURL();
+  // const API = apiURL();
 
-  useEffect(() => {
-    const fetchAllPosts = async () => {
-      let res = await axios.get(`${API}/users/`);
-      setPosts(res.data.body);
-    };
-    fetchAllPosts();
-  }, []);
+  // useEffect(() => {
+  //   const fetchAllPosts = async () => {
+  //     let res = await axios.get(`${API}/users/`);
+  //     setPosts(res.data.body);
+  //   };
+  //   fetchAllPosts();
+  // }, []);
 
   return <div></div>;
 };

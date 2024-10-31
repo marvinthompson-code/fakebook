@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { TextField, Button, Link} from "@mui/material";
+import { TextField, Button, Link } from "@mui/material";
 
 // login function from firebase
 import { login } from "../util/firebaseFunctions";
@@ -18,6 +18,7 @@ import "../styles/Login.css";
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
   const [guestEmail, setGuestEmail] = useState("fakebookGuest@test.com");
   const [guestPassword, setGuestPassword] = useState("test123");
@@ -33,8 +34,8 @@ const LoginForm = () => {
       dispatch(updateUser(user));
       navigate("/feed");
     } catch (error) {
-      // error handling
       console.log(error.message);
+      setError(error.message)
     }
   };
 
@@ -55,7 +56,6 @@ const LoginForm = () => {
       <div className="loginFormContainer">
         <form onSubmit={handleSubmit} className="loginForm">
           <TextField
-            error
             id="outlined-basic"
             variant="outlined"
             className="loginInput"
@@ -65,7 +65,6 @@ const LoginForm = () => {
             required
           />
           <TextField
-            error
             id="outlined-basic"
             className="loginInput"
             variant="outlined"
@@ -82,7 +81,9 @@ const LoginForm = () => {
           >
             Guest Login
           </Button>
-          <Button className="submitButton" variant="contained" type="submit">Log In</Button>
+          <Button className="submitButton" variant="contained" type="submit">
+            Log In
+          </Button>
         </form>
       </div>
       <Link href="/signup">Don't have an account? Sign Up</Link>
