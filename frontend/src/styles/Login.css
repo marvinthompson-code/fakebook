@@ -1,0 +1,22 @@
+.loginForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginFormContainer {
+    width: 70%;
+    margin: auto;
+}
+
+.loginInput {
+    margin: 5px;
+}
+
+.submitButton {
+    margin: 5px;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+}
