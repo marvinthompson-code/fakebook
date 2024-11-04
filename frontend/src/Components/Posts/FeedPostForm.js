@@ -41,15 +41,23 @@ const FeedPostForm = () => {
           multiline
           placeholder="What's on your mind?"
           onChange={(e) => setContent(e.target.value)}
+          sx={{
+            width: "80%",
+            margin: "5px"
+          }}
         />
-        <div>
+        <div style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+        }}>
         <input type="file"/>
-        <Button>Upload</Button>
+        <Button type="button" variant="outlined">Upload</Button>
+        <Button variant="contained" type="submit">Submit</Button>
         </div>
         
       </div>
 
-      <Button variant="contained">Submit</Button>
+      
     </form>
   );
 };

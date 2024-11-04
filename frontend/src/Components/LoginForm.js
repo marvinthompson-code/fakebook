@@ -63,6 +63,9 @@ const LoginForm = () => {
             onChange={(e) => setemail(e.target.value)}
             placeholder="Email*"
             required
+            sx={{
+              margin: "5px"
+            }}
           />
           <TextField
             id="outlined-basic"
@@ -72,16 +75,24 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password*"
             required
+            sx={{
+              margin: "5px"
+            }}
           />
           <Button
             className="submitButton"
             type="button"
             variant="contained"
             onClick={handleGuestSubmit}
+            sx={{
+              margin: "5px"
+            }}
           >
             Guest Login
           </Button>
-          <Button className="submitButton" variant="contained" type="submit">
+          <Button className="submitButton" variant="contained" type="submit" sx={{
+              margin: "5px"
+            }}>
             Log In
           </Button>
         </form>

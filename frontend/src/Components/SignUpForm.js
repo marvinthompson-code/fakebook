@@ -12,6 +12,8 @@ import { TextField, Button, Link } from "@mui/material";
 // css
 import "../styles/SignUp.css";
 
+const mockImageUrl = "IMAGEURL"
+
 const SignUpForm = () => {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
@@ -40,59 +42,64 @@ const SignUpForm = () => {
     }
   };
 
-  const handleFirebaseUpload = () => {
-    if (imageAsFile === "") {
-      alert("Please choose a valid file before uploading");
-    } else if (imageAsFile !== null) {
-      const uploadTask = storage
-        .ref(`/images/${imageAsFile.name}`)
-        .put(imageAsFile);
-      uploadTask.on(
-        "state_changed",
-        (snapShot) => {
-          console.log(snapShot);
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          storage
-            .ref("images")
-            .child(imageAsFile.name)
-            .getDownloadURL()
-            .then((fireBaseUrl) => {
-              setImageUrl(fireBaseUrl);
-            });
-        }
-      );
-      setToggleUploadMsg(true);
-    } else {
-      setToggleUploadMsg(false);
-    }
-  };
+  // const handleFirebaseUpload = () => {
+  //   if (imageAsFile === "") {
+  //     alert("Please choose a valid file before uploading");
+  //   } else if (imageAsFile !== null) {
+  //     const storageRef = storage.ref()
+      
+      // const uploadTask = storage
+      //   .ref(`/images/${imageAsFile.name}`)
+      //   .put(imageAsFile);
+      // uploadTask.on(
+      //   "state_changed",
+      //   (snapShot) => {
+      //     console.log(snapShot);
+      //   },
+      //   (err) => {
+      //     console.log(err);
+      //   },
+      //   () => {
+      //     storage
+      //       .ref("images")
+      //       .child(imageAsFile.name)
+      //       .getDownloadURL()
+      //       .then((fireBaseUrl) => {
+      //         setImageUrl(fireBaseUrl);
+      //       });
+      //   }
+      // );
+      // setToggleUploadMsg(true);
+  //   } else {
+  //     setToggleUploadMsg(false);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (password === confirmPassword) {
-        let res = await signUp(email, password);
-        console.log("Show user: ", res);
+      // if (password === confirmPassword) {
+      let res = await signUp(email, password);
+      debugger
+      console.log("Show user: ", res);
 
-        const { uid } = res.user;
+      const { uid } = res.user;
 
-        await axios.post(`${API}/users`, {
-          id: uid,
-          email,
-          username,
-          fullName,
-          profile_picture: imageUrl,
-          bio,
-        });
+      let postResponse = await axios.post(`${API}/users`, {
+        id: uid,
+        email,
+        username,
+        fullName,
+        profile_picture: mockImageUrl,
+        bio,
+      });
 
-        navigate("/feed");
-      } else {
-        alert("Passwords do not match")
-      }
+      debugger
+
+      // navigate("/feed");
+      // } else {
+      //   alert("Passwords do not match")
+      // }
     } catch (error) {
       console.log(error.message);
       setError(error.message);
@@ -109,6 +116,9 @@ const SignUpForm = () => {
             placeholder="Full name*"
             variant="outlined"
             required
+            sx={{
+              margin: "5px",
+            }}
           />
           <TextField
             className="signupInput"
@@ -116,9 +126,16 @@ const SignUpForm = () => {
             placeholder="Username*"
             variant="outlined"
             required
+            sx={{
+              margin: "5px",
+            }}
           />
           <div>
-            <input type="file" onChange={handleImageAsFile} placeholder="Select profile picture"/>
+            <input
+              type="file"
+              onChange={handleImageAsFile}
+              placeholder="Select profile picture"
+            />
             <Button>Upload Profile Picture</Button>
           </div>
 
@@ -128,6 +145,9 @@ const SignUpForm = () => {
             placeholder="Bio/Description"
             variant="outlined"
             multiline
+            sx={{
+              margin: "5px",
+            }}
           />
           <TextField
             className="signupInput"
@@ -135,6 +155,9 @@ const SignUpForm = () => {
             placeholder="Email*"
             variant="outlined"
             required
+            sx={{
+              margin: "5px",
+            }}
           />
           <TextField
             className="signupInput"
@@ -142,6 +165,9 @@ const SignUpForm = () => {
             placeholder="Password*"
             variant="outlined"
             required
+            sx={{
+              margin: "5px",
+            }}
           />
           <TextField
             className="signupInput"
@@ -149,8 +175,18 @@ const SignUpForm = () => {
             placeholder="Confirm password*"
             variant="outlined"
             required
+            sx={{
+              margin: "5px",
+            }}
           />
-          <Button type="submit" variant="contained" className="submitButton">
+          <Button
+            type="submit"
+            variant="contained"
+            className="submitButton"
+            sx={{
+              margin: "5px",
+            }}
+          >
             Sign Up
           </Button>
         </form>
