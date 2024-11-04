@@ -12,7 +12,7 @@ export const login = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
-export const signUp = async (email, password) => {
+export const signUp = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 

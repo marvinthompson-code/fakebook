@@ -85,7 +85,7 @@ const SignUpForm = () => {
 
       const { uid } = res.user;
 
-      let postResponse = await axios.post(`${API}/users`, {
+      let postResponse = await axios.post(`${API}/users/addUser`, {
         id: uid,
         email,
         username,

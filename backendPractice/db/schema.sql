@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS fakebook_db;
-CREATE DATABASE fakebook_db;
+-- DROP DATABASE IF EXISTS fakebook_db;
+-- CREATE DATABASE fakebook_db;
 
-\c fakebook_db;
+-- \c fakebook_db;
 
 DROP TABLE IF EXISTS users CASCADE;
 

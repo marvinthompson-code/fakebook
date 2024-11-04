@@ -1,4 +1,4 @@
-const { db } = require("../db/index");
+const { db } = require("../db/index")
 
 const fetchAllUsers = async (req, res, next) => {
   try {
@@ -57,6 +57,7 @@ const deleteSingleUser = async (req, res, next) => {
 const createNewUser = async (req, res, next) => {
   try {
     let { email, username, full_name, profile_picture, bio, id } = req.body;
+    debugger
     let user = await db.one(
       "INSERT INTO users (email, username, full_name, profile_picture, bio, id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [email, username, full_name, profile_picture, bio, id]

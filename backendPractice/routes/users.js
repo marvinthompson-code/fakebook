@@ -10,6 +10,6 @@ const {
 users.get("/", fetchAllUsers);
 users.get("/:id", fetchSingleUserById)
 users.delete("/:id", deleteSingleUser)
-users.post("/", createNewUser)
+users.post("/addUser", createNewUser)
 
 module.exports = users;
