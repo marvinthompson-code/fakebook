@@ -35,29 +35,35 @@ const FeedPostForm = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        paddingTop: "10px",
+      }}
+    >
       <div>
         <TextField
           multiline
           placeholder="What's on your mind?"
           onChange={(e) => setContent(e.target.value)}
           sx={{
-            width: "80%",
-            margin: "5px"
+            width: "60%",
+            margin: "10px",
           }}
         />
-        <div style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-        }}>
-        <input type="file"/>
-        <Button type="button" variant="outlined">Upload</Button>
-        <Button variant="contained" type="submit">Submit</Button>
-        </div>
-        
-      </div>
+        <div>
+          <div>
+            <input type="file" />
+            <Button type="button" variant="outlined">
+              Upload
+            </Button>
+          </div>
 
-      
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </div>
+      </div>
     </form>
   );
 };

@@ -7,7 +7,6 @@ const Feed = () => {
     <>
       <Nav />
       <div>
-        <h1>Feed</h1>
         <FeedPostForm />
         <FeedPosts />
       </div>

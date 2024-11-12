@@ -1,3 +1,5 @@
+import "../../styles/Posts/Post.css"
+
 import {
   Card,
   Typography,
@@ -6,61 +8,91 @@ import {
   Button,
   CardContent,
   Box,
+  Divider,
+  Tooltip,
+  Badge,
 } from "@mui/material";
 
-import mockProfile from "../../styles/Pictures/def.jpg"
-import mockPicture from "../../styles/Pictures/mockHousePic.jpg"
+import mockProfile from "../../styles/Pictures/def.jpg";
+import mockPicture from "../../styles/Pictures/mockHousePic.jpg";
 
-const Post = () => {
-  // image_url
-  // owner_id
-  // original_author
-  // content
-  // time_stamp
-
-
-  const mockData = {
-    image_url: "",
-    owner_id: 1,
-    original_author: 1,
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-    time_stamp: "00:00:00",
-  };
-
-
-  const { image_url, owner_id, original_author, content, time_stamp } =
-    mockData;
+const Post = ({ post }) => {
+  const {
+    content,
+    full_name,
+    id,
+    image_url,
+    original_author,
+    owner_id,
+    time_stamp,
+    username,
+  } = post;
 
   return (
-    <div>
-      <Box>
-        <Card sx={{
-            width: "60%",
-        }}>
+    <div id={id}>
+      <Box
+        sx={{
+          margin: "15px",
+          width: "45%",
+        }}
+      >
+        <Card sx={{}}>
           <CardContent>
-            
-            <Box sx={{
+            <Box
+              sx={{
                 display: "flex",
-                justifyContent: "space-between"
-            }}>
-                <img src={mockProfile} alt="default profile pic" style={{
-                    height: "50px",
-                    borderRadius: "30px"
-                }}/>
-                <Typography sx={{
-                    lineHeight: "1.5"
-                }} variant="h6">POST OWNER NAME</Typography>
-            </Box>
-              
-        
-            <br></br>
-            <Typography sx={{
-                textAlign: "left"
-            }} variant="body1">{content}</Typography>
-          </CardContent>
-          <CardActions>
+                justifyContent: "space-between",
+              }}
+            >
 
-          </CardActions>
+                <Tooltip title="Post Owner Name" placement="right-start">
+                  <img
+                  id="postOwnerProfilePicture"
+                    src={mockProfile}
+                    alt="default profile pic"
+                    style={{
+                      height: "50px",
+                      borderRadius: "30px",
+                    }}
+                  />
+                </Tooltip>
+              
+              <Typography
+                sx={{
+                  lineHeight: "1.5",
+                }}
+                variant="h7"
+              >
+                {username}
+              </Typography>
+            </Box>
+
+            <br></br>
+            <Divider variant="middle" />
+            <br></br>
+            <Typography
+              sx={{
+                textAlign: "left",
+                width: "88%"
+              }}
+              variant="body2"
+            >
+              {content}
+            </Typography>
+            <br></br>
+
+            {image_url !== "" ? (
+              <Box>
+                <img
+                  src={image_url}
+                  style={{
+                    height: "250px",
+                  }}
+                />
+              </Box>
+            ) : null}
+          </CardContent>
+          <CardActions></CardActions>
         </Card>
       </Box>
     </div>
