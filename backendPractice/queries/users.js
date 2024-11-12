@@ -1,4 +1,4 @@
-const { db } = require("../db/index")
+const db = require("../db/index")
 
 const fetchAllUsers = async (req, res, next) => {
   try {
@@ -57,20 +57,19 @@ const deleteSingleUser = async (req, res, next) => {
 const createNewUser = async (req, res, next) => {
   try {
     let { email, username, full_name, profile_picture, bio, id } = req.body;
-    debugger
     let user = await db.one(
-      "INSERT INTO users (email, username, full_name, profile_picture, bio, id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [email, username, full_name, profile_picture, bio, id]
+      "INSERT INTO users (id, full_name, username, email, profile_picture, bio) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [id, full_name, username, email, profile_picture, bio]
     );
     res.status(200).json({
       status: "Success",
       message: "Created new User",
-      user,
+      body: user,
     });
   } catch (error) {
     res.status(404).json({
       status: "Unsuccessful",
-      message: "Could not create user",
+      message: `Could not create user: ${error.message}`,
     });
     next(error);
   }

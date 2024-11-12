@@ -8,11 +8,10 @@ import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
 import { TextField, Button, Link } from "@mui/material";
-
 // css
 import "../styles/SignUp.css";
 
-const mockImageUrl = "IMAGEURL"
+const mockImageUrl = "IMAGEURL";
 
 const SignUpForm = () => {
   const [fullName, setFullName] = useState("");
@@ -42,64 +41,28 @@ const SignUpForm = () => {
     }
   };
 
-  // const handleFirebaseUpload = () => {
-  //   if (imageAsFile === "") {
-  //     alert("Please choose a valid file before uploading");
-  //   } else if (imageAsFile !== null) {
-  //     const storageRef = storage.ref()
-      
-      // const uploadTask = storage
-      //   .ref(`/images/${imageAsFile.name}`)
-      //   .put(imageAsFile);
-      // uploadTask.on(
-      //   "state_changed",
-      //   (snapShot) => {
-      //     console.log(snapShot);
-      //   },
-      //   (err) => {
-      //     console.log(err);
-      //   },
-      //   () => {
-      //     storage
-      //       .ref("images")
-      //       .child(imageAsFile.name)
-      //       .getDownloadURL()
-      //       .then((fireBaseUrl) => {
-      //         setImageUrl(fireBaseUrl);
-      //       });
-      //   }
-      // );
-      // setToggleUploadMsg(true);
-  //   } else {
-  //     setToggleUploadMsg(false);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // if (password === confirmPassword) {
       let res = await signUp(email, password);
-      debugger
+      debugger;
       console.log("Show user: ", res);
 
       const { uid } = res.user;
 
-      let postResponse = await axios.post(`${API}/users/addUser`, {
+      await axios.post(`${API}/users/addUser`, {
         id: uid,
-        email,
-        username,
         fullName,
-        profile_picture: mockImageUrl,
+        username,
+        email,
+        mockImageUrl,
         bio,
       });
 
-      debugger
+      debugger;
 
-      // navigate("/feed");
-      // } else {
-      //   alert("Passwords do not match")
-      // }
+      dispatch(updateUser(res.user));
     } catch (error) {
       console.log(error.message);
       setError(error.message);

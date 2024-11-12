@@ -1,4 +1,4 @@
-const users = require("express").Router();
+const users = require('express').Router();
 
 const {
   fetchAllUsers,
