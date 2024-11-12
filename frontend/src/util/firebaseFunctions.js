@@ -1,15 +1,15 @@
 import firebase from "../firebase";
 
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, getIdToken } from "firebase/auth";
 
 const auth = getAuth();
 
 export const logout = () => {
-  return firebase.auth().signOut();
+  return signOut();
 };
 
 export const login = (email, password) => {
-  return firebase.auth().signInWithEmailAndPassword(email, password);
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signUp = (email, password) => {
@@ -17,5 +17,5 @@ export const signUp = (email, password) => {
 };
 
 export const getFirebaseIdToken = () => {
-  return firebase.auth().currentUser.getIdToken(false);
+  return auth().currentUser.getIdToken(false);
 };

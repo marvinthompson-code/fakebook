@@ -44,25 +44,28 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // if (password === confirmPassword) {
-      let res = await signUp(email, password);
-      debugger;
-      console.log("Show user: ", res);
+      if (confirmPassword === password) {
+        let res = await signUp(email, password);
+        debugger;
+        console.log("Show user: ", res);
 
-      const { uid } = res.user;
+        const { uid } = res.user;
 
-      await axios.post(`${API}/users/addUser`, {
-        id: uid,
-        fullName,
-        username,
-        email,
-        mockImageUrl,
-        bio,
-      });
+        let res2 = await axios.post(`${API}/api/users/addUser`, {
+          id: uid,
+          fullName,
+          username,
+          email,
+          mockImageUrl,
+          bio,
+        });
 
-      debugger;
-
-      dispatch(updateUser(res.user));
+        debugger;
+        dispatch(updateUser(res.user));
+        navigate('/feed')
+      } else {
+        alert("Passwords do not match");
+      }
     } catch (error) {
       console.log(error.message);
       setError(error.message);

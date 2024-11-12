@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { TextField, Button, Link } from "@mui/material";
-
-// login function from firebase
 import { login } from "../util/firebaseFunctions";
-
-// useDispatch to dispatch the login function from the user slice
 import { useDispatch } from "react-redux";
-
-// import updateUser function from the user slice
 import { updateUser } from "../store/slices/user/userSlice";
 
 // css
@@ -20,8 +13,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
 
-  const [guestEmail, setGuestEmail] = useState("fakebookGuest@test.com");
-  const [guestPassword, setGuestPassword] = useState("test123");
+  const [guestEmail, setGuestEmail] = useState("testformuser@test.com");
+  const [guestPassword, setGuestPassword] = useState("123456");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,9 +23,11 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       let res = await login(email, password);
-      const { user } = res;
-      dispatch(updateUser(user));
-      navigate("/feed");
+      debugger
+      // const { user } = res;
+      // debugger
+      // dispatch(updateUser(user));
+      // navigate("/feed");
     } catch (error) {
       console.log(error.message);
       setError(error.message)
