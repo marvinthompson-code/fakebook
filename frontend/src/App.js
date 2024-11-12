@@ -8,6 +8,7 @@ import Feed from "./Pages/Feed";
 
 // testing components
 import Post from "../src/Components/Posts/Post"
+import Nav from "../src/Components/Nav"
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/signup"} element={<SignUpPage />} />
         <Route exact path={"/feed"} element={<Feed />} />
-        <Route exact path={"/dev"}  element={<Post />}/>
+        <Route exact path={"/dev"}  element={<Nav />}/>
       </Routes>
     </div>
   );
