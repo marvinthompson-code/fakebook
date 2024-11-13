@@ -38,5 +38,7 @@ export const updateUser = (user) => async (dispatch) => {
     dispatch(setLoading(false));
   } catch (error) {}
 };
+
+export const selectUser = (state) => state.user;
 export const { recieveUser, logout } = userSlice.actions;
 export default userSlice.reducer;

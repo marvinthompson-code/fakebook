@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { apiURL } from "../../util/apiURL";
+import { selectLoading } from "../../store/slices/loading/loadingSlice";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../store/slices/loading/loadingSlice";
 import axios from "axios";
 
 // Components
@@ -9,12 +12,20 @@ const FeedPosts = () => {
   const [posts, setPosts] = useState([]);
 
   const API = apiURL();
+  const dispatch = useDispatch();
+  const loading = dispatch(selectLoading);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
-      let res = await axios.get(`${API}/api/posts`);
-      const { posts } = res.data.body;
-      setPosts(posts);
+      try {
+        dispatch(setLoading(true));
+        let res = await axios.get(`${API}/api/posts`);
+        const { posts } = res.data.body;
+        setPosts(posts);
+        dispatch(setLoading(false));
+      } catch (error) {
+        console.log(error.messaage);
+      }
     };
 
     fetchAllPosts();
@@ -29,9 +40,15 @@ const FeedPosts = () => {
     );
   });
 
-  return <div style={{
-    textAlign: "-webkit-center"
-  }}>{feedPosts}</div>;
+  return (
+    <div
+      style={{
+        textAlign: "-webkit-center",
+      }}
+    >
+      {feedPosts}
+    </div>
+  );
 };
 
 export default FeedPosts;

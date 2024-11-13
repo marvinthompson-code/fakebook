@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { apiURL } from "../../util/apiURL";
-import { storage } from "../../firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading } from "../../store/slices/loading/loadingSlice";
 import axios from "axios";
+import { selectUser } from "../../store/slices/user/userSlice";
 
 const FeedPostForm = () => {
   const [content, setContent] = useState("");
@@ -12,6 +14,9 @@ const FeedPostForm = () => {
   const [imageAsFile, setImageAsFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [toggleUploadMsg, setToggleUploadMsg] = useState(false);
+
+  const user = useSelector(selectUser);
+  // const { id } = user;
 
   const API = apiURL();
 
@@ -27,13 +32,21 @@ const FeedPostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // axios.post request goes here
+    setLoading(true);
     try {
+      await axios.post(`${API}/api/posts`, {
+        content,
+        imageUrl,
+        // id,
+        // id,
+      });
     } catch (error) {
       console.log(error.message);
       setError(error.message);
     }
+    setLoading(false);
   };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -47,8 +60,8 @@ const FeedPostForm = () => {
           placeholder="What's on your mind?"
           onChange={(e) => setContent(e.target.value)}
           sx={{
-            width: "60%",
-            margin: "10px",
+            width: "100%",
+            marginBottom: "10px",
           }}
         />
         <div>

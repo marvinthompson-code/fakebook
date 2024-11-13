@@ -1,5 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { updateUser } from "./store/slices/user/userSlice";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 // Pages
 import LoginPage from "./Pages/LoginPage";
@@ -9,6 +14,8 @@ import Feed from "./Pages/Feed";
 // testing components
 import Post from "../src/Components/Posts/Post"
 import Nav from "../src/Components/Nav"
+import FeedNewsCard from "./Components/FeedNewsCard";
+import FeedProfileCard from "./Components/FeedProfileCard";
 
 function App() {
   return (
@@ -17,7 +24,7 @@ function App() {
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/signup"} element={<SignUpPage />} />
         <Route exact path={"/feed"} element={<Feed />} />
-        <Route exact path={"/dev"}  element={<Post />}/>
+        <Route exact path={"/dev"}  element={<FeedProfileCard />}/>
       </Routes>
     </div>
   );
