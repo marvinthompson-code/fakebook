@@ -13,22 +13,22 @@ export const userSlice = createSlice({
     logout: {
       reducer: (state) => null,
     },
+    returnUser: {
+      reducer: (state) => state
+    }
   },
 });
 
-export const asyncLogout = (dispatch) => {
+export const asyncLogout = () => (dispatch) => {
   dispatch(logout());
 };
 
 export const updateUser = (user) => async (dispatch) => {
   dispatch(setLoading(true));
-  debugger
   try {
     if (user) {
       const { email, uid } = user;
-      debugger
       const lastLogin = user.metadata.lastSignInTime;
-      debugger
       dispatch(recieveUser({ email, lastLogin, id: uid }));
       const token = await getFirebaseIdToken();
       dispatch(recieveToken(token));

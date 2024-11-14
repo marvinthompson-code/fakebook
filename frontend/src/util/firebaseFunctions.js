@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, si
 const auth = getAuth();
 
 export const logout = () => {
-  return signOut();
+  return signOut(auth);
 };
 
 export const login = (email, password) => {
@@ -17,5 +17,5 @@ export const signUp = (email, password) => {
 };
 
 export const getFirebaseIdToken = () => {
-  return auth().currentUser.getIdToken(false);
+  return auth.currentUser.getIdToken(false);
 };

@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../util/firebaseFunctions";
+import { useDispatch } from "react-redux";
+import { recieveToken } from "../store/slices/user/tokenSlice";
+import { asyncLogout } from "../store/slices/user/userSlice";
 
 import {
   AppBar,
@@ -23,6 +27,7 @@ const Nav = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +44,11 @@ const Nav = () => {
     setAnchorElUser(null);
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    dispatch(asyncLogout());
+    dispatch(recieveToken(null));
+    logout();
     navigate("/");
   };
 

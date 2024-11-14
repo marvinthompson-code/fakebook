@@ -6,6 +6,7 @@ import { signUp } from "../util/firebaseFunctions";
 import { storage } from "../firebase";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import { Card } from "@mui/material";
 
 import { TextField, Button, Link } from "@mui/material";
 // css
@@ -62,7 +63,7 @@ const SignUpForm = () => {
 
         debugger;
         dispatch(updateUser(res.user));
-        navigate('/feed')
+        navigate("/feed");
       } else {
         alert("Passwords do not match");
       }
@@ -72,93 +73,111 @@ const SignUpForm = () => {
     }
   };
   return (
-    <>
-      <h1>Sign Up</h1>
-      <div className="signupFormContainer">
-        <form onSubmit={handleSubmit} className="signupForm">
-          <TextField
-            className="signupInput"
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="Full name*"
-            variant="outlined"
-            required
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <TextField
-            className="signupInput"
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username*"
-            variant="outlined"
-            required
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <div>
-            <input
-              type="file"
-              onChange={handleImageAsFile}
-              placeholder="Select profile picture"
+    <div
+      style={{
+        height: "100vh",
+        verticalAlign: "middle",
+        textAlign: "-webkit-center",
+      }}
+    >
+      <Card sx={{
+        width: "45%",
+        paddingTop: "10px",
+        top: "50%",
+      }}>
+        <h1>Sign Up</h1>
+        <div className="signupFormContainer">
+          <form onSubmit={handleSubmit} className="signupForm">
+            <TextField
+              className="signupInput"
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Full name*"
+              variant="outlined"
+              required
+              sx={{
+                margin: "5px",
+              }}
             />
-            <Button>Upload Profile Picture</Button>
-          </div>
+            <TextField
+              className="signupInput"
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username*"
+              variant="outlined"
+              required
+              sx={{
+                margin: "5px",
+              }}
+            />
+            <div>
+              <input
+                type="file"
+                onChange={handleImageAsFile}
+                placeholder="Select profile picture"
+              />
+              <Button>Upload Profile Picture</Button>
+            </div>
 
-          <TextField
-            className="signupInput"
-            onChange={(e) => setBio(e.target.value)}
-            placeholder="Bio/Description"
-            variant="outlined"
-            multiline
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <TextField
-            className="signupInput"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email*"
-            variant="outlined"
-            required
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <TextField
-            className="signupInput"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password*"
-            variant="outlined"
-            required
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <TextField
-            className="signupInput"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm password*"
-            variant="outlined"
-            required
-            sx={{
-              margin: "5px",
-            }}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            className="submitButton"
-            sx={{
-              margin: "5px",
-            }}
-          >
-            Sign Up
-          </Button>
-        </form>
-      </div>
-      <Link href="/">Back to Login</Link>
-    </>
+            <TextField
+              className="signupInput"
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Bio/Description"
+              variant="outlined"
+              multiline
+              sx={{
+                margin: "5px",
+              }}
+            />
+            <TextField
+              className="signupInput"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email*"
+              variant="outlined"
+              required
+              sx={{
+                margin: "5px",
+              }}
+            />
+            <TextField
+              className="signupInput"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password*"
+              variant="outlined"
+              required
+              sx={{
+                margin: "5px",
+              }}
+            />
+            <TextField
+              className="signupInput"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm password*"
+              variant="outlined"
+              required
+              sx={{
+                margin: "5px",
+              }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              className="submitButton"
+              sx={{
+                margin: "5px",
+              }}
+            >
+              Sign Up
+            </Button>
+          </form>
+        </div>
+        <div style={{
+          paddingBottom: "15px"
+        }}>
+
+
+        <Link href="/">Back to Login</Link>
+        </div>
+      </Card>
+    </div>
   );
 };
 

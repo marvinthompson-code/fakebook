@@ -55,29 +55,41 @@ const Post = ({ post }) => {
                   }}
                 >
                   <Tooltip title="Post Owner Name" placement="right-start">
-                    <img
-                      id="postOwnerProfilePicture"
-                      src={mockProfile}
-                      alt="default profile pic"
-                      style={{
-                        height: "50px",
-                        borderRadius: "30px",
-                      }}
-                    />
-                  </Tooltip>
+                    <div>
+                      <img
+                        id="postOwnerProfilePicture"
+                        src={mockProfile}
+                        alt="default profile pic"
+                        style={{
+                          height: "50px",
+                          borderRadius: "30px",
+                          paddingRight: "5%"
+                        }}
+                      />
+                      <div>
 
-                  <Typography
-                    sx={{
-                      lineHeight: "1.5",
-                    }}
-                    variant="h7"
-                  >
-                    {username}
-                  </Typography>
+                      
+                        <Typography
+                      // variant="h7"
+                      sx={{
+                        paddingLeft: "26%",
+                        fontSize: "small"
+                      }}
+                      >
+                        {username}
+                      </Typography>
+                      </div>
+                    </div>
+                 
+                  </Tooltip>
                 </Box>
 
-                <br></br>
-                <Divider variant="middle" />
+                <Divider
+                  variant="inset"
+                  sx={{
+                    marginTop: "5px",
+                  }}
+                />
                 <br></br>
                 <Typography
                   sx={{

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box, Card } from "@mui/material";
 import { apiURL } from "../../util/apiURL";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoading } from "../../store/slices/loading/loadingSlice";
@@ -48,36 +48,49 @@ const FeedPostForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        paddingTop: "10px",
+    <Box
+      sx={{
+        marginTop: "10px",
+        paddingBottom: "10px",
       }}
     >
-      <div>
-        <TextField
-          multiline
-          placeholder="What's on your mind?"
-          onChange={(e) => setContent(e.target.value)}
-          sx={{
-            width: "100%",
-            marginBottom: "10px",
+      <Card
+        sx={{
+          paddingBottom: "20px",
+        }}
+      >
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            paddingTop: "10px",
           }}
-        />
-        <div>
+        >
           <div>
-            <input type="file" />
-            <Button type="button" variant="outlined">
-              Upload
-            </Button>
-          </div>
+            <TextField
+              multiline
+              placeholder="What's on your mind?"
+              onChange={(e) => setContent(e.target.value)}
+              sx={{
+                width: "80%",
+                marginBottom: "10px",
+                backgroundColor: "#ffffff",
+                borderRadius: "25px",
+              }}
+            />
+            <div>
+              <input type="file" />
+              <Button type="button" variant="text">
+                Upload
+              </Button>
 
-          <Button variant="contained" type="submit">
-            Submit
-          </Button>
-        </div>
-      </div>
-    </form>
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
+            </div>
+          </div>
+        </form>
+      </Card>
+    </Box>
   );
 };
 

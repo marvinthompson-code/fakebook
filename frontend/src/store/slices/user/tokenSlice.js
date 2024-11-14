@@ -8,5 +8,7 @@ export const tokenSlice = createSlice({
     }
 })
 
+
+export const selectToken = (state) => state.token;
 export const { recieveToken } = tokenSlice.actions
 export default tokenSlice.reducer

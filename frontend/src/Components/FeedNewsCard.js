@@ -22,10 +22,10 @@ const FeedNewsCard = () => {
             fontSize: "0.7rem",
             fontWeight: "bold"
         }}>{article.title}</Typography>
-        <Divider variant="inset" sx={{
-            margin: "5px"
-        }}/>
-        <Typography >
+       
+        <Typography sx={{
+          textAlign: "left"
+        }}>
           <a href={article.link} target="_blank" style={{
             textAlign: "left",
             fontSize: "small"
@@ -33,6 +33,9 @@ const FeedNewsCard = () => {
             Learn more
           </a>
         </Typography>
+        <Divider variant="inset" sx={{
+            margin: "5px"
+        }}/>
       </li>
     );
   });
@@ -48,7 +51,8 @@ const FeedNewsCard = () => {
         <Typography sx={{
             textAlign: "left",
             paddingLeft: "46px",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            marginTop: "10px"
         }}>Fakebook News</Typography>
         <Typography sx={{
             textAlign: "left",
