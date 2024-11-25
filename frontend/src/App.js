@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, Router, Navigate } from "react-router-dom";
+import { Route, Routes,} from "react-router-dom";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { updateUser } from "./store/slices/user/userSlice";
@@ -14,6 +14,7 @@ import Feed from "./Pages/Feed";
 
 // testing components
 import FeedProfileCard from "./Components/FeedProfileCard";
+import Profile from "./Pages/Profile";
 
 function App() {
   const [color, setColor] = useState("#e9e5df");
@@ -47,7 +48,7 @@ function App() {
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/signup"} element={<SignUpPage />} />
         <Route exact path={"/feed"} element={ <Feed />} />
-        <Route exact path={"/dev"} element={<FeedProfileCard />} />
+        <Route exact path={"/dev"} element={<Profile />} />
       </Routes>
     </div>
   );

@@ -26,15 +26,19 @@ export const postsSlice = createSlice({
 
 export const createNewPost = (post) => async (dispatch, getState) => {
   try {
+    debugger
     const state = getState();
+    debugger
+    const { token } = state
     let res = await axios({
       method: "post",
-      url: `${API}/posts`,
+      url: `${API}/api/posts`,
       data: post,
       headers: {
-        AuthToken: state.token,
+        AuthToken: token,
       },
     });
+    debugger
     let { newPost } = res.data.body;
 
     dispatch(addPost(newPost));

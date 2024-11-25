@@ -17,6 +17,9 @@ const serviceAccount = {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://fakebook-19af5.firebaseio.com"
 });
 
 const db = admin.firestore();
+
+module.exports = admin

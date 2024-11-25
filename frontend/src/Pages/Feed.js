@@ -64,7 +64,7 @@ const Feed = () => {
               flexDirection: "column",
             }}
           >
-            <FeedPostForm />
+            <FeedPostForm userInfo={userInfo}/>
             <div
               style={{
                 textAlign: "-webkit-center",
@@ -72,9 +72,9 @@ const Feed = () => {
             >
               <Divider
                 sx={{
-                  marginTop: "30px",
+                  marginTop: "5%",
                 }}
-                variant="inset"
+                variant="middle"
               />
             </div>
           </div>

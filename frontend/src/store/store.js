@@ -6,12 +6,14 @@ import logger from "redux-logger";
 import userReducer from "./slices/user/userSlice"
 import tokenReducer from "./slices/user/tokenSlice"
 import loadingReducer from "./slices/loading/loadingSlice"
+import postsReducer from "./slices/posts/postsSlice"
 
 export default configureStore({
     reducer: {
         user: userReducer,
         token: tokenReducer,
-        loading: loadingReducer
+        loading: loadingReducer,
+        posts: postsReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 })

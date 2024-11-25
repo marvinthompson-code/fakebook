@@ -1,24 +1,20 @@
 import { useState } from "react";
 import { TextField, Button, Box, Card } from "@mui/material";
-import { apiURL } from "../../util/apiURL";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLoading } from "../../store/slices/loading/loadingSlice";
-import axios from "axios";
-import { selectUser } from "../../store/slices/user/userSlice";
+import { createNewPost } from "../../store/slices/posts/postsSlice";
 
-const FeedPostForm = () => {
+import mockPicture from "../../styles/Pictures/mockHousePic.jpg";
+
+const FeedPostForm = ({ userInfo }) => {
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
-
-  // image states
   const [imageAsFile, setImageAsFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [toggleUploadMsg, setToggleUploadMsg] = useState(false);
 
-  const user = useSelector(selectUser);
-  // const { id } = user;
-
-  const API = apiURL();
+  const dispatch = useDispatch();
+  // const { id } = userInfo;
 
   const handleImageAsFile = (e) => {
     const image = e.target.files[0];
@@ -33,64 +29,64 @@ const FeedPostForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      await axios.post(`${API}/api/posts`, {
+    dispatch(
+      createNewPost({
         content,
-        imageUrl,
-        // id,
-        // id,
-      });
-    } catch (error) {
-      console.log(error.message);
-      setError(error.message);
-    }
+        image_url: imageUrl !== "" ? imageUrl : mockPicture,
+      })
+    );
+    setContent("");
     setLoading(false);
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: "10px",
-        paddingBottom: "10px",
-      }}
-    >
-      <Card
-        sx={{
-          paddingBottom: "20px",
-        }}
-      >
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            paddingTop: "10px",
+    <>
+      {userInfo && (
+        <Box
+          sx={{
+            marginTop: "10px",
+            paddingBottom: "10px",
           }}
         >
-          <div>
-            <TextField
-              multiline
-              placeholder="What's on your mind?"
-              onChange={(e) => setContent(e.target.value)}
-              sx={{
-                width: "80%",
-                marginBottom: "10px",
-                backgroundColor: "#ffffff",
-                borderRadius: "25px",
+          <Card
+            sx={{
+              paddingBottom: "20px",
+            }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                paddingTop: "10px",
               }}
-            />
-            <div>
-              <input type="file" />
-              <Button type="button" variant="text">
-                Upload
-              </Button>
+            >
+              <div>
+                <TextField
+                  multiline
+                  placeholder="What's on your mind?"
+                  onChange={(e) => setContent(e.target.value)}
+                  sx={{
+                    width: "87%",
+                    marginBottom: "10px",
+                    backgroundColor: "#ffffff",
+                    borderRadius: "25px",
+                  }}
+                />
+                <div>
+                  <input type="file" />
+                  <Button type="button" variant="text">
+                    Upload
+                  </Button>
 
-              <Button variant="contained" type="submit">
-                Submit
-              </Button>
-            </div>
-          </div>
-        </form>
-      </Card>
-    </Box>
+                  <Button variant="contained" type="submit">
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </Card>
+        </Box>
+      )}
+    </>
   );
 };
 

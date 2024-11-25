@@ -11,7 +11,10 @@ const fetchAllUsers = async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.log(err.message);
+    res.status(400).json({
+      message: `${err.message}`
+    })
+    next(err)
   }
 };
 
@@ -26,12 +29,12 @@ const fetchSingleUserById = async (req, res, next) => {
         singleUser,
       },
     });
-  } catch (error) {
+  } catch (err) {
     res.status(404).json({
       status: "Unsuccessful",
-      message: "Could not retrieve user by ID",
+      message: `Could not retrieve user by ID: ${err.message}`,
     });
-    next(error);
+    next(err);
   }
 };
 
@@ -47,10 +50,11 @@ const deleteSingleUser = async (req, res, next) => {
         user,
       },
     });
-  } catch (error) {
+  } catch (err) {
     res.status(400).json({
-      message: "Could not delete a user",
+      message: `Could not delete a user: ${err.message}`,
     });
+    next(err)
   }
 };
 
@@ -66,12 +70,12 @@ const createNewUser = async (req, res, next) => {
       message: "Created new User",
       body: user,
     });
-  } catch (error) {
+  } catch (err) {
     res.status(404).json({
       status: "Unsuccessful",
-      message: `Could not create user: ${error.message}`,
+      message: `Could not create user: ${err.message}`,
     });
-    next(error);
+    next(err);
   }
 };
 

@@ -6,7 +6,7 @@ const { fetchAllPosts, fetchAllUserPosts, fetchSinglePost, addPost, deleteSingle
 
 posts.get("/", fetchAllPosts)
 posts.get("/:id", fetchSinglePost)
-posts.get("/user/:owner_id", fetchAllUserPosts)
+posts.get("/user/:id", fetchAllUserPosts)
 posts.delete("/:id", deleteSinglePost)
 posts.post("/", checkFirebaseToken, addPost)
 

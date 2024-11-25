@@ -1,7 +1,10 @@
 import { Card, Typography, Divider, Tooltip, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import mockProfile from "../styles/Pictures/def.jpg";
 
 const FeedProfileCard = ({ userInfo }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       {userInfo && (
@@ -22,6 +25,7 @@ const FeedProfileCard = ({ userInfo }) => {
                   marginLeft: "15px",
                   marginTop: "5px",
                 }}
+                onClick={() => navigate(`/profile/${userInfo.id}`)}
               >
                 <img
                   id="postOwnerProfilePicture"
@@ -54,7 +58,9 @@ const FeedProfileCard = ({ userInfo }) => {
               >
                 {userInfo.bio}
               </Typography>
-              <Divider variant="inset" />
+              <Divider variant="inset" sx={{
+                marginTop: "5px"
+              }}/>
               <br></br>
             </Box>
           </Card>

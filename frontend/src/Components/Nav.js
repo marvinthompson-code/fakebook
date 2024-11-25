@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../util/firebaseFunctions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { recieveToken } from "../store/slices/user/tokenSlice";
 import { asyncLogout } from "../store/slices/user/userSlice";
+import { selectUser } from "../store/slices/user/userSlice";
 
 import {
   AppBar,
@@ -28,6 +29,7 @@ const Nav = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -94,7 +96,18 @@ const Nav = () => {
               >
                 {pages.map((page) => {
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                    {page === "Feed" ? (
+                      <Typography
+                        sx={{ textAlign: "center" }}
+                        onClick={() => navigate("/feed")}
+                      >
+                        {page}
+                      </Typography>
+                    ) : (
+                      <Typography sx={{ textAlign: "center" }}>
+                        {page}
+                      </Typography>
+                    )}
                   </MenuItem>;
                 })}
               </Menu>
@@ -161,7 +174,10 @@ const Nav = () => {
                         {setting}
                       </Typography>
                     ) : (
-                      <Typography sx={{ textAlign: "center" }}>
+                      <Typography
+                        sx={{ textAlign: "center" }}
+                        onClick={() => navigate(`/profile/${user.id}`)}
+                      >
                         {setting}
                       </Typography>
                     )}

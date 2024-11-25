@@ -53,7 +53,7 @@ const FeedNewsCard = () => {
             paddingLeft: "46px",
             fontWeight: "bold",
             marginTop: "10px"
-        }}>Fakebook News</Typography>
+        }}>Latest News</Typography>
         <Typography sx={{
             textAlign: "left",
             paddingLeft: "46px",

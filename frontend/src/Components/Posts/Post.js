@@ -1,6 +1,7 @@
 import "../../styles/Posts/Post.css";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../../store/slices/loading/loadingSlice";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   Typography,
@@ -13,6 +14,7 @@ import {
   Tooltip,
   Badge,
   Skeleton,
+  Stack,
 } from "@mui/material";
 
 import mockProfile from "../../styles/Pictures/def.jpg";
@@ -20,6 +22,7 @@ import mockPicture from "../../styles/Pictures/mockHousePic.jpg";
 
 const Post = ({ post }) => {
   const loading = useSelector(selectLoading);
+  const navigate = useNavigate();
 
   const {
     content,
@@ -46,73 +49,75 @@ const Post = ({ post }) => {
               width: "33.33%",
             }}
           >
-            <Card sx={{}}>
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Tooltip title="Post Owner Name" placement="right-start">
-                    <div>
+            <Card>
+              <Stack
+                direction="row"
+                sx={{ justifyContent: "space-between", alignItems: "center" }}
+              >
+                <CardContent>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Tooltip title="Post Owner Name" placement="right-start">
+                      <div onClick={() => navigate(`/profile/${owner_id}`)}>
+                        <img
+                          id="postOwnerProfilePicture"
+                          src={mockProfile}
+                          alt="default profile pic"
+                          style={{
+                            height: "50px",
+                            borderRadius: "30px",
+                            paddingRight: "5%",
+                          }}
+                        />
+                        <div>
+                          <Typography
+                            sx={{
+                              fontSize: "medium",
+                              fontWeight: "bold"
+                            }}
+                          >
+                            {username}
+                          </Typography>
+                        </div>
+                      </div>
+                    </Tooltip>
+                  </Box>
+
+                  <Divider
+                    sx={{
+                      paddingBottom: "5px",
+                    }}
+                  />
+                  <div style={{
+                    marginTop: "5px"
+                  }}>
+                    <Typography
+                      sx={{
+                        textAlign: "left",
+                      }}
+                      variant="body2"
+                    >
+                      {content}
+                    </Typography>
+                  </div>
+                  <br></br>
+
+                  {image_url !== "" ? (
+                    <Box>
                       <img
-                        id="postOwnerProfilePicture"
-                        src={mockProfile}
-                        alt="default profile pic"
+                        src={image_url}
                         style={{
-                          height: "50px",
-                          borderRadius: "30px",
-                          paddingRight: "5%"
+                          width: "100%",
                         }}
                       />
-                      <div>
-
-                      
-                        <Typography
-                      // variant="h7"
-                      sx={{
-                        paddingLeft: "26%",
-                        fontSize: "small"
-                      }}
-                      >
-                        {username}
-                      </Typography>
-                      </div>
-                    </div>
-                 
-                  </Tooltip>
-                </Box>
-
-                <Divider
-                  variant="inset"
-                  sx={{
-                    marginTop: "5px",
-                  }}
-                />
-                <br></br>
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    width: "88%",
-                  }}
-                  variant="body2"
-                >
-                  {content}
-                </Typography>
-                <br></br>
-
-                {image_url !== "" ? (
-                  <Box>
-                    <img
-                      src={image_url}
-                      style={{
-                        height: "250px",
-                      }}
-                    />
-                  </Box>
-                ) : null}
-              </CardContent>
+                    </Box>
+                  ) : null}
+                </CardContent>
+              </Stack>
               <CardActions></CardActions>
             </Card>
           </Box>

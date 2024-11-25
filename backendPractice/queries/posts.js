@@ -1,4 +1,4 @@
-const db  = require("../db/index");
+const db = require("../db/index");
 
 const fetchAllPosts = async (req, res, next) => {
   try {
@@ -12,8 +12,11 @@ const fetchAllPosts = async (req, res, next) => {
         posts,
       },
     });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(400).json({
+      message: `Unsuccessful: ${err.message}`
+    })
+    next(err);
   }
 };
 
@@ -21,19 +24,20 @@ const fetchAllUserPosts = async (req, res, next) => {
   try {
     let { id } = req.params;
     let posts = await db.any(
-      "SELECT * FROM posts JOIN users ON posts.owner_id = users.id WHERE posts.owner_id = $1 ORDER BY posts.id DESC RETURNING *",
+      "SELECT posts.id, owner_id, content, image_url, time_stamp, username, full_name, original_author FROM posts INNER JOIN users ON posts.owner_id = users.id WHERE posts.owner_id = $1 ORDER BY posts.id DESC",
       [id]
     );
     res.status(200).json({
-      message: `Successfully retrieved posts for: ${id}`,
+      message: `Successfully retrieved posts: ${id}`,
       body: {
         posts,
       },
     });
-  } catch (error) {
+  } catch (err) {
     res.status(400).json({
-      message: `Unable to retrieve posts for: ${id}`,
+      message: `Unable to retrieve posts: ${err.message}`,
     });
+    next(err)
   }
 };
 
@@ -41,16 +45,17 @@ const fetchSinglePost = async (req, res, next) => {
   try {
     let { id } = req.params;
     let post = await db.one("SELECT * FROM posts WHERE id = $1 ", [id]);
-    req.status(200).json({
+    res.status(200).json({
       message: `Successfully retrieved a single post for: ${id}`,
       body: {
         post,
       },
     });
-  } catch (error) {
-    req.status(400).json({
-      message: "Unsuccessfully retrieved a post",
+  } catch (err) {
+    res.status(400).json({
+      message: `Unsuccessful: ${err.message}`,
     });
+    next(err)
   }
 };
 
@@ -65,10 +70,11 @@ const deleteSinglePost = async (req, res, next) => {
         post,
       },
     });
-  } catch (error) {
+  } catch (err) {
     res.status(400).json({
-      message: "Could not delete a post",
+      message: `Could not delete a post: ${err.message}`,
     });
+    next(err)
   }
 };
 
@@ -89,11 +95,11 @@ const addPost = async (req, res, next) => {
         newPost,
       },
     });
-  } catch (error) {
+  } catch (err) {
     res.status(400).json({
-      message: "Post unsuccessful",
+      message: `Post unsuccessful: ${err.message}`,
     });
-    next(error);
+    next(err);
   }
 };
 
