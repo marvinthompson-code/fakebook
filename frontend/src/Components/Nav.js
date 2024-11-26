@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink} from "react-router-dom";
 import { logout } from "../util/firebaseFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { recieveToken } from "../store/slices/user/tokenSlice";
 import { asyncLogout } from "../store/slices/user/userSlice";
 import { selectUser } from "../store/slices/user/userSlice";
+
+import "../styles/Nav.css"
 
 import {
   AppBar,
@@ -20,7 +22,7 @@ import {
   MenuItem,
 } from "@mui/material";
 
-const pages = ["Feed", "About"];
+const pages = ["About"];
 const settings = ["Profile", "Logout"];
 
 const Nav = () => {
@@ -56,21 +58,21 @@ const Nav = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" className="appBar">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="logo"
+              href="/feed"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontWeight: 700,
                 fontFamily: "monospace",
                 letterSpacing: ".3rem",
-                color: "white",
+                color: "#93E1D8",
                 textDecoration: "none",
               }}
             >
@@ -94,22 +96,20 @@ const Nav = () => {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
-                {pages.map((page) => {
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    {page === "Feed" ? (
-                      <Typography
-                        sx={{ textAlign: "center" }}
-                        onClick={() => navigate("/feed")}
-                      >
-                        {page}
-                      </Typography>
-                    ) : (
-                      <Typography sx={{ textAlign: "center" }}>
-                        {page}
-                      </Typography>
-                    )}
-                  </MenuItem>;
-                })}
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  to={"/about"}
+                  component={NavLink}
+                >
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      color: "gray !important"
+                    }}
+                  >
+                    About
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
             <Typography
@@ -137,6 +137,7 @@ const Nav = () => {
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
+                  href={"/about"}
                 >
                   {page}
                 </Button>

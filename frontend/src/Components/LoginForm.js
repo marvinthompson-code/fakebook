@@ -36,7 +36,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       let res = await login(guestEmail, guestPassword);
-      debugger
+      debugger;
       dispatch(updateUser(res.user));
       navigate("/feed");
     } catch (error) {
@@ -45,79 +45,102 @@ const LoginForm = () => {
   };
 
   return (
-    <div style={{
-      height: "100vh",
-      verticalAlign: "middle",
-      // position: "relative",
-      textAlign: "-webkit-center"
-    }}>
-
-   
-    <Card sx={{
-      width: "45%",
-      paddingTop: "10px",
-      top: "50%",
-      // position: "absolute",
-      // transform: "translateY(-50%)"
-    }}>
-      <div>
-        <h1>Login</h1>
-        <div className="loginFormContainer">
-          <form onSubmit={handleSubmit} className="loginForm">
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              className="loginInput"
-              type="text"
-              onChange={(e) => setemail(e.target.value)}
-              placeholder="Email*"
-              required
+    <div
+      style={{
+        height: "100vh",
+        verticalAlign: "middle",
+        // position: "relative",
+        textAlign: "-webkit-center",
+      }}
+    >
+      <Card
+        sx={{
+          width: "45%",
+          paddingTop: "10px",
+          top: "50%",
+          background: "#FFFFFF",
+          // border: "1px solid #A1A5A5",
+          // position: "absolute",
+          // transform: "translateY(-50%)"
+        }}
+      >
+        <div>
+          <h1
+            style={{
+              color: "#2CA093",
+            }}
+          >
+            Login
+          </h1>
+          <div className="loginFormContainer">
+            <form onSubmit={handleSubmit} className="loginForm">
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                className="loginInput"
+                type="text"
+                onChange={(e) => setemail(e.target.value)}
+                placeholder="Email*"
+                required
+                sx={{
+                  margin: "5px",
+                }}
+              />
+              <TextField
+                id="outlined-basic"
+                className="loginInput"
+                variant="outlined"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password*"
+                required
+                sx={{
+                  margin: "5px",
+                }}
+              />
+              <Button
+                className="submitButton"
+                type="button"
+                variant="contained"
+                onClick={handleGuestSubmit}
+                sx={{
+                  margin: "5px",
+                  color: "#FFFFFF",
+                  background: "#2CA093",
+                }}
+              >
+                Guest Login
+              </Button>
+              <Button
+                className="submitButton"
+                variant="contained"
+                type="submit"
+                sx={{
+                  margin: "5px",
+                  color: "#FFFFFF",
+                  background: "#2CA093",
+                }}
+              >
+                Log In
+              </Button>
+            </form>
+          </div>
+          <div
+            style={{
+              paddingBottom: "15px",
+            }}
+          >
+            <Link
+              href="/signup"
               sx={{
-                margin: "5px",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              className="loginInput"
-              variant="outlined"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password*"
-              required
-              sx={{
-                margin: "5px",
-              }}
-            />
-            <Button
-              className="submitButton"
-              type="button"
-              variant="contained"
-              onClick={handleGuestSubmit}
-              sx={{
-                margin: "5px",
+                color: "#060E0D",
               }}
             >
-              Guest Login
-            </Button>
-            <Button
-              className="submitButton"
-              variant="contained"
-              type="submit"
-              sx={{
-                margin: "5px",
-              }}
-            >
-              Log In
-            </Button>
-          </form>
+              Don't have an account? Sign Up
+            </Link>
+          </div>
         </div>
-        <div style={{
-          paddingBottom: "15px"
-        }}>
-          <Link href="/signup">Don't have an account? Sign Up</Link>
-        </div>
-      </div>
-    </Card>
+      </Card>
     </div>
   );
 };

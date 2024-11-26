@@ -16,6 +16,8 @@ const FeedProfileCard = ({ userInfo }) => {
           <Card
             sx={{
               width: "80%",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #F5F5F5"
             }}
           >
             <Tooltip title={userInfo.username} placement="right">
@@ -44,6 +46,7 @@ const FeedProfileCard = ({ userInfo }) => {
                   textAlign: "left",
                   marginLeft: "15px",
                   fontWeight: "bold",
+                  color: "#2CA093"
                 }}
               >
                 {userInfo.username}
@@ -53,13 +56,14 @@ const FeedProfileCard = ({ userInfo }) => {
                   textAlign: "left",
                   marginLeft: "15px",
                   fontSize: "small",
-                  color: "gray",
+                  color: "#060E0D",
                 }}
               >
                 {userInfo.bio}
               </Typography>
               <Divider variant="inset" sx={{
-                marginTop: "5px"
+                marginTop: "5px",
+                background: "#F5F5F5"
               }}/>
               <br></br>
             </Box>

@@ -1,0 +1,14 @@
+.MuiInputBase-root {
+    border-radius: 25px !important;
+    color: white;
+    border: 1px solid #F5F5F5
+}
+
+.FeedFormInput {
+    background-color: #3B3F3F;
+    /* color: antiquewhite; */
+}
+
+.FeedFormInput::placeholder {
+    color: white;
+}

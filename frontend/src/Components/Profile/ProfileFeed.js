@@ -2,6 +2,7 @@ import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import { useSelector } from "react-redux";
 import { selectPosts } from "../../store/slices/posts/postsSlice";
+import { useMatch } from "react-router-dom";
 
 // Components
 import Post from "../Posts/Post";
@@ -15,7 +16,7 @@ const ProfileFeed = () => {
   console.log(newPosts)
 
   const API = apiURL();
-
+  const match = useMatch('profile/:id')
  
 
   const postIndex = posts.map((post) => {
@@ -29,13 +30,13 @@ const ProfileFeed = () => {
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        let res = await axios.get(`${API}/api/posts`);
+        let res = await axios.get(`${API}/api/posts/user/${match.params.id}`);
+        debugger
         setPosts(res.data.body.posts);
       } catch (error) {
         console.log(error.message);
       }
     };
-
     fetchUserPosts();
   }, []);
 

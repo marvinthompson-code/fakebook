@@ -70,12 +70,13 @@ const Feed = () => {
                 textAlign: "-webkit-center",
               }}
             >
-              <Divider
+              {/* <Divider
                 sx={{
                   marginTop: "5%",
+                  background: "#5A5E5E"
                 }}
                 variant="middle"
-              />
+              /> */}
             </div>
           </div>
           <div

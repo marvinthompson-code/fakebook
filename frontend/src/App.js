@@ -17,7 +17,7 @@ import FeedProfileCard from "./Components/FeedProfileCard";
 import Profile from "./Pages/Profile";
 
 function App() {
-  const [color, setColor] = useState("#e9e5df");
+  const [color, setColor] = useState("#EBEBEB");
   const [token, setToken] = useState(null)
 
   const auth = getAuth();
@@ -48,7 +48,7 @@ function App() {
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/signup"} element={<SignUpPage />} />
         <Route exact path={"/feed"} element={ <Feed />} />
-        <Route exact path={"/dev"} element={<Profile />} />
+        <Route exact path={"/profile/:id"} element={<Profile />} />
       </Routes>
     </div>
   );

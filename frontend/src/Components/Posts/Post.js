@@ -47,9 +47,13 @@ const Post = ({ post }) => {
             sx={{
               margin: "15px",
               width: "33.33%",
+              
             }}
           >
-            <Card>
+            <Card sx={{
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #F5F5F5"
+            }}>
               <Stack
                 direction="row"
                 sx={{ justifyContent: "space-between", alignItems: "center" }}
@@ -77,7 +81,8 @@ const Post = ({ post }) => {
                           <Typography
                             sx={{
                               fontSize: "medium",
-                              fontWeight: "bold"
+                              fontWeight: "bold",
+                              color: "#2CA093"
                             }}
                           >
                             {username}
@@ -89,7 +94,7 @@ const Post = ({ post }) => {
 
                   <Divider
                     sx={{
-                      paddingBottom: "5px",
+                      background: "#F5F5F5"
                     }}
                   />
                   <div style={{
@@ -98,6 +103,7 @@ const Post = ({ post }) => {
                     <Typography
                       sx={{
                         textAlign: "left",
+                        color: "#060E0D"
                       }}
                       variant="body2"
                     >

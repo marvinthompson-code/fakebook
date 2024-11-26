@@ -20,7 +20,8 @@ const FeedNewsCard = () => {
         <Typography  sx={{
             textAlign: "left",
             fontSize: "0.7rem",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: "#060E0D"
         }}>{article.title}</Typography>
        
         <Typography sx={{
@@ -28,13 +29,15 @@ const FeedNewsCard = () => {
         }}>
           <a href={article.link} target="_blank" style={{
             textAlign: "left",
-            fontSize: "small"
+            fontSize: "small",
+            color: "#2F3736"
           }}>
             Learn more
           </a>
         </Typography>
         <Divider variant="inset" sx={{
-            margin: "5px"
+            margin: "5px",
+            background: "#F5F5F5"
         }}/>
       </li>
     );
@@ -46,18 +49,21 @@ const FeedNewsCard = () => {
         <Card sx={{
         width: "80%",
         textAlign: "-webkit-center",
-        marginTop: "10px"
+        marginTop: "10px",
+        background: "#FFFFFF",
+        border: "1px solid #F5F5F5"
       }}>
         <Typography sx={{
             textAlign: "left",
             paddingLeft: "46px",
             fontWeight: "bold",
-            marginTop: "10px"
+            marginTop: "10px",
+            color: "#2CA093"
         }}>Latest News</Typography>
         <Typography sx={{
             textAlign: "left",
             paddingLeft: "46px",
-            color: "gray"
+            color: "#A1A5A5"
         }}>Top Stories</Typography>
           <ul style={{
             listStyleType: "none"
