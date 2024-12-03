@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { selectLoading } from "../../store/slices/loading/loadingSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectUser } from "../../store/slices/user/userSlice";
 import { useEffect, useState } from "react";
 
 import DeletePostModal from "./DeletePostModal";
@@ -91,6 +90,9 @@ const Post = ({ post, userInfo }) => {
                     }}
                   >
                     {userId === original_author ? (
+                      <Tooltip title="Delete Post">
+
+                     
                       <ClearIcon
                         fontSize="smallest"
                         sx={{
@@ -99,6 +101,7 @@ const Post = ({ post, userInfo }) => {
                         className="clearIcon"
                         onClick={handleOpen}
                       />
+                       </Tooltip>
                     ) : <ClearIcon
                     fontSize="smallest"
                     sx={{

@@ -17,11 +17,14 @@ import FeedProfileCard from "./Components/FeedProfileCard";
 import Profile from "./Pages/Profile";
 
 function App() {
+  const location = Window.location
   const [color, setColor] = useState("#EBEBEB");
   const [token, setToken] = useState(null)
 
   const auth = getAuth();
   const dispatch = useDispatch();
+
+
   
 
   useEffect(() => {

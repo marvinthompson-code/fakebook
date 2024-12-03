@@ -130,6 +130,7 @@ const LoginForm = () => {
               href="/signup"
               sx={{
                 color: "#060E0D",
+                paddingTop: "15px"
               }}
             >
               Don't have an account? Sign Up
