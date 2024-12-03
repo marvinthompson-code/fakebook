@@ -11,21 +11,21 @@ import { selectUser } from "../store/slices/user/userSlice";
 import { useSelector } from "react-redux";
 
 import axios from "axios";
+import SuggestedFriendsGrid from "../Components/SuggestedFriendsGrid";
 
 const Feed = () => {
-  const [userInfo, setUserInfo] = useState(null)
+  const [userInfo, setUserInfo] = useState(null);
 
   // Modal stuff
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   const handleOpen = () => {
-    setIsOpen(true)
-  }
-
+    setIsOpen(true);
+  };
 
   const API = apiURL();
   const user = useSelector(selectUser);
@@ -35,12 +35,12 @@ const Feed = () => {
       try {
         if (user) {
           let res = await axios.get(`${API}/api/users/${user.id}`);
-          const { singleUser } = res.data.body
-          setUserInfo(singleUser)
+          const { singleUser } = res.data.body;
+          setUserInfo(singleUser);
           debugger;
         }
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
       }
     };
 
@@ -48,7 +48,7 @@ const Feed = () => {
   }, [user]);
   return (
     <>
-      <Nav handleOpen={handleOpen}/>
+      <Nav handleOpen={handleOpen} />
       <>
         <div
           className="row"
@@ -66,7 +66,7 @@ const Feed = () => {
               textAlign: "-webkit-center",
             }}
           >
-            <FeedProfileCard userInfo={userInfo}/>
+            <FeedProfileCard userInfo={userInfo} />
           </div>
           <div
             style={{
@@ -75,13 +75,12 @@ const Feed = () => {
               flexDirection: "column",
             }}
           >
-            <FeedPostForm userInfo={userInfo}/>
+            <FeedPostForm userInfo={userInfo} />
             <div
               style={{
                 textAlign: "-webkit-center",
               }}
-            >
-            </div>
+            ></div>
           </div>
           <div
             style={{
@@ -92,11 +91,14 @@ const Feed = () => {
               textAlign: "-webkit-center",
             }}
           >
-            <FeedNewsCard />
+            <div style={{}}>
+              <FeedNewsCard />
+              <SuggestedFriendsGrid />
+            </div>
           </div>
         </div>
-        <FeedPosts userInfo={userInfo}/>
-        <AboutModal isOpen={isOpen} handleClose={handleClose}/>
+        <FeedPosts userInfo={userInfo} />
+        <AboutModal isOpen={isOpen} handleClose={handleClose} />
       </>
     </>
   );

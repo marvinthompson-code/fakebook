@@ -181,7 +181,7 @@ const Post = ({ post, userInfo }) => {
               <CardActions></CardActions>
             </Card>
           </Box>
-          <DeletePostModal isOpen={isOpen} handleClose={handleClose}/>
+          <DeletePostModal isOpen={isOpen} handleClose={handleClose} postId={id}/>
         </div>
       )}
     </>

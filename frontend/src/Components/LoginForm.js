@@ -14,6 +14,7 @@ const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const [guestEmail, setGuestEmail] = useState("testformuser@test.com");
   const [guestPassword, setGuestPassword] = useState("123456");
@@ -27,6 +28,7 @@ const LoginForm = () => {
       let res = await login(email, password);
       debugger;
       dispatch(updateUser(res.user));
+      setIsSuccess(true)
       navigate("/feed");
     } catch (error) {
       console.log(error.message);

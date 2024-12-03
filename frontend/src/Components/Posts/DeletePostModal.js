@@ -1,4 +1,7 @@
 import { Box, Button, Typography, Modal } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { deletePostAsync } from "../../store/slices/posts/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -13,7 +16,16 @@ const style = {
   p: 4,
 };
 
-const DeletePostModal = ({ isOpen, handleClose }) => {
+const DeletePostModal = ({ isOpen, handleClose, postId }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(deletePostAsync(postId));
+    navigate("/feed")
+  };
+
   return (
     <div>
       <Modal
@@ -33,19 +45,31 @@ const DeletePostModal = ({ isOpen, handleClose }) => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Are you sure you'd like to delete this post?
           </Typography>
-          <Box sx={{
-            justifyContent: "space-between",
-            textAlign: "center",
-            marginTop: "10px"
-          }}>
-            <Button sx={{
+          <Box
+            sx={{
+              justifyContent: "space-between",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
+          >
+            <Button
+              sx={{
                 margin: "5px",
                 color: "#FFFFFF",
-                background: "#2CA093"
-            }}>Delete</Button>
-            <Button sx={{
-                margin: "5px"
-            }} onClick={handleClose}>Back</Button>
+                background: "#2CA093",
+              }}
+              onClick={handleClick}
+            >
+              Delete
+            </Button>
+            <Button
+              sx={{
+                margin: "5px",
+              }}
+              onClick={handleClose}
+            >
+              Back
+            </Button>
           </Box>
         </Box>
       </Modal>
@@ -53,4 +77,4 @@ const DeletePostModal = ({ isOpen, handleClose }) => {
   );
 };
 
-export default DeletePostModal
+export default DeletePostModal;

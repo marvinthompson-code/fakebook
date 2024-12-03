@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes,} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { updateUser } from "./store/slices/user/userSlice";
@@ -13,19 +13,16 @@ import SignUpPage from "./Pages/SignUpPage";
 import Feed from "./Pages/Feed";
 
 // testing components
-import FeedProfileCard from "./Components/FeedProfileCard";
+import SuggestedFriendsGrid from "./Components/SuggestedFriendsGrid";
 import Profile from "./Pages/Profile";
 
 function App() {
-  const location = Window.location
+  const location = Window.location;
   const [color, setColor] = useState("#EBEBEB");
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
 
   const auth = getAuth();
   const dispatch = useDispatch();
-
-
-  
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -36,9 +33,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const authToken = dispatch(selectToken)
-    setToken(authToken)
-  }, [])
+    const authToken = dispatch(selectToken);
+    setToken(authToken);
+  }, []);
 
   return (
     <div
@@ -50,8 +47,9 @@ function App() {
       <Routes>
         <Route exact path={"/"} element={<LoginPage />} />
         <Route exact path={"/signup"} element={<SignUpPage />} />
-        <Route exact path={"/feed"} element={ <Feed />} />
+        <Route exact path={"/feed"} element={<Feed />} />
         <Route exact path={"/profile/:id"} element={<Profile />} />
+        <Route exact path={"/dev"} element={<SuggestedFriendsGrid />} />
       </Routes>
     </div>
   );

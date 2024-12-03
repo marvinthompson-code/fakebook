@@ -51,7 +51,7 @@ export const deletePostAsync = (id) => async (dispatch) => {
   try {
     await axios({
       method: "delete",
-      url: `${API}/${id}`,
+      url: `${API}/api/posts/${id}`,
     });
     dispatch(setLoading(true));
     dispatch(deletePost(id));

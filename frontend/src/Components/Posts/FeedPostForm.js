@@ -54,7 +54,8 @@ const FeedPostForm = ({ userInfo }) => {
             sx={{
               paddingBottom: "20px",
               background: "#FFFFFF",
-              border: "1px solid #F5F5F5"
+              border: "1px solid #F5F5F5",
+              height: "100%"
             }}
           >
             <form
