@@ -1,7 +1,5 @@
 import { Box, Button, Typography, Modal } from "@mui/material";
 
-import whiteLogo from "../../styles/Logo/logo-white.png";
-
 const style = {
   position: "absolute",
   top: "50%",

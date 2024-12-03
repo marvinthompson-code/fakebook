@@ -1,15 +1,25 @@
 import { Card, Typography, Divider, Tooltip, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import PersonIcon from "@mui/icons-material/Person"
 import mockProfile from "../styles/Pictures/def.jpg";
+import EditProfileModal from "../Components/Profile/EditProfileModal"
 
 import "../styles/FeedProfileCard.css"
 
 const FeedProfileCard = ({ userInfo }) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   const navigate = useNavigate();
 
-  console.log(userInfo)
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
 
   return (
     <>
@@ -118,6 +128,7 @@ const FeedProfileCard = ({ userInfo }) => {
                     sx={{
                       fontSize: "15px",
                     }}
+                    onClick={handleOpen}
                   >
                     Edit Profile
                   </Typography>
@@ -125,6 +136,7 @@ const FeedProfileCard = ({ userInfo }) => {
               </ul>
             </Box>
           </Card>
+          <EditProfileModal isOpen={isOpen} handleClose={handleClose}/>
         </div>
       )}
     </>
