@@ -1,9 +1,15 @@
 import { Card, Typography, Divider, Tooltip, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import PersonIcon from "@mui/icons-material/Person"
 import mockProfile from "../styles/Pictures/def.jpg";
+
+import "../styles/FeedProfileCard.css"
 
 const FeedProfileCard = ({ userInfo }) => {
   const navigate = useNavigate();
+
+  console.log(userInfo)
 
   return (
     <>
@@ -17,7 +23,7 @@ const FeedProfileCard = ({ userInfo }) => {
             sx={{
               width: "80%",
               backgroundColor: "#FFFFFF",
-              border: "1px solid #F5F5F5"
+              border: "1px solid #F5F5F5",
             }}
           >
             <Tooltip title={userInfo.username} placement="right">
@@ -46,7 +52,7 @@ const FeedProfileCard = ({ userInfo }) => {
                   textAlign: "left",
                   marginLeft: "15px",
                   fontWeight: "bold",
-                  color: "#2CA093"
+                  color: "#2CA093",
                 }}
               >
                 {userInfo.username}
@@ -61,11 +67,62 @@ const FeedProfileCard = ({ userInfo }) => {
               >
                 {userInfo.bio}
               </Typography>
-              <Divider variant="inset" sx={{
-                marginTop: "5px",
-                background: "#F5F5F5"
-              }}/>
-              <br></br>
+              <Divider
+                variant="inset"
+                sx={{
+                  marginTop: "5px",
+                  background: "#F5F5F5",
+                }}
+              />
+              <ul
+                style={{
+                  listStyleType: "none",
+                  textAlign: "left",
+                  paddingLeft: "10px"
+                }}
+              >
+                <li
+                className="FeedProfileCardLi"
+                  style={{
+                    margin: "1px",
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <PersonIcon fontSize="small" sx={{
+                    paddingRight: "5px"
+                  }}/>
+                  <Typography
+                    sx={{
+                      fontSize: "15px",
+                      margin: "1px"
+                    }}
+                    onClick={() => navigate(`/profile/${userInfo.id}`)}
+                  >
+                    View Profile
+                  </Typography>
+                </li>
+                <li
+                className="FeedProfileCardLi"
+                  style={{
+                    margin: "1px",
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  {" "}
+                  <EditIcon fontSize="small" sx={{
+                    paddingRight: "5px"
+                  }}/>{" "}
+                  <Typography
+                    sx={{
+                      fontSize: "15px",
+                    }}
+                  >
+                    Edit Profile
+                  </Typography>
+                </li>
+              </ul>
             </Box>
           </Card>
         </div>

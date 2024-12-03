@@ -1,0 +1,5 @@
+.FeedProfileCardLi:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 1s ease-in;
+}

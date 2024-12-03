@@ -8,6 +8,8 @@ import { updateUser } from "../store/slices/user/userSlice";
 // css
 import "../styles/Login.css";
 
+import scrollmeicon from "../styles/Logo/scrollme2.png"
+
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,8 +51,8 @@ const LoginForm = () => {
       style={{
         height: "100vh",
         verticalAlign: "middle",
-        // position: "relative",
         textAlign: "-webkit-center",
+        paddingTop: "5%"
       }}
     >
       <Card
@@ -59,19 +61,13 @@ const LoginForm = () => {
           paddingTop: "10px",
           top: "50%",
           background: "#FFFFFF",
-          // border: "1px solid #A1A5A5",
-          // position: "absolute",
-          // transform: "translateY(-50%)"
+          borderRadius: "25px"
         }}
       >
         <div>
-          <h1
-            style={{
-              color: "#2CA093",
-            }}
-          >
-            Login
-          </h1>
+          <img src={scrollmeicon} style={{
+            height: "200px"
+          }}/>
           <div className="loginFormContainer">
             <form onSubmit={handleSubmit} className="loginForm">
               <TextField

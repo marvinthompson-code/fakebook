@@ -12,7 +12,7 @@ import {
 // Components
 import Post from "../Posts/Post";
 
-const FeedPosts = () => {
+const FeedPosts = ({ userInfo}) => {
   const posts = useSelector(selectPosts);
   const API = apiURL();
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const FeedPosts = () => {
   const feedPosts = posts.map((post) => {
     return (
       <div key={post.id}>
-        <Post post={post} />
+        <Post post={post} userInfo={userInfo} />
       </div>
     );
   });

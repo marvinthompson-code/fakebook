@@ -2,17 +2,22 @@ import "../../styles/Posts/Post.css";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../../store/slices/loading/loadingSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectUser } from "../../store/slices/user/userSlice";
+import { useEffect, useState } from "react";
+
+import DeletePostModal from "./DeletePostModal";
+
+import ClearIcon from "@mui/icons-material/Clear";
 import {
   Card,
   Typography,
   CardActions,
-  IconButton,
   Button,
   CardContent,
   Box,
   Divider,
   Tooltip,
-  Badge,
   Skeleton,
   Stack,
 } from "@mui/material";
@@ -20,9 +25,23 @@ import {
 import mockProfile from "../../styles/Pictures/def.jpg";
 import mockPicture from "../../styles/Pictures/mockHousePic.jpg";
 
-const Post = ({ post }) => {
+const Post = ({ post, userInfo }) => {
+  const [userId, setUserId] = useState(null);
+
+  // Modal Stuff
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
   const loading = useSelector(selectLoading);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     content,
@@ -35,11 +54,17 @@ const Post = ({ post }) => {
     username,
   } = post;
 
+  useEffect(() => {
+    if (userInfo) {
+      setUserId(userInfo.id)
+    }
+  }, [userInfo]);
+
   return (
     <>
       {loading ? (
         <>
-          <Skeleton variant="rectangular" width={"45%"} height={100} />
+          <Skeleton variant="rectangular" width={"33.33%"} height={100} />
         </>
       ) : (
         <div id={id}>
@@ -47,18 +72,41 @@ const Post = ({ post }) => {
             sx={{
               margin: "15px",
               width: "33.33%",
-              
             }}
           >
-            <Card sx={{
-              backgroundColor: "#FFFFFF",
-              border: "1px solid #F5F5F5"
-            }}>
+            <Card
+              sx={{
+                backgroundColor: "#FFFFFF",
+                border: "1px solid #F5F5F5",
+              }}
+            >
               <Stack
                 direction="row"
                 sx={{ justifyContent: "space-between", alignItems: "center" }}
               >
                 <CardContent>
+                  <div
+                    style={{
+                      textAlign: "right",
+                    }}
+                  >
+                    {userId === original_author ? (
+                      <ClearIcon
+                        fontSize="smallest"
+                        sx={{
+                          color: "#A1A5A5",
+                        }}
+                        className="clearIcon"
+                        onClick={handleOpen}
+                      />
+                    ) : <ClearIcon
+                    fontSize="smallest"
+                    sx={{
+                      color: "#A1A5A5",
+                      display: "none"
+                    }}
+                  />}
+                  </div>
                   <Box
                     sx={{
                       display: "flex",
@@ -82,7 +130,7 @@ const Post = ({ post }) => {
                             sx={{
                               fontSize: "medium",
                               fontWeight: "bold",
-                              color: "#2CA093"
+                              color: "#2CA093",
                             }}
                           >
                             {username}
@@ -94,16 +142,19 @@ const Post = ({ post }) => {
 
                   <Divider
                     sx={{
-                      background: "#F5F5F5"
+                      background: "#F5F5F5",
+                      marginTop: "5px",
                     }}
                   />
-                  <div style={{
-                    marginTop: "5px"
-                  }}>
+                  <div
+                    style={{
+                      marginTop: "5px",
+                    }}
+                  >
                     <Typography
                       sx={{
                         textAlign: "left",
-                        color: "#060E0D"
+                        color: "#060E0D",
                       }}
                       variant="body2"
                     >
@@ -127,6 +178,7 @@ const Post = ({ post }) => {
               <CardActions></CardActions>
             </Card>
           </Box>
+          <DeletePostModal isOpen={isOpen} handleClose={handleClose}/>
         </div>
       )}
     </>

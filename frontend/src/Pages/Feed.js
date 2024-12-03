@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import FeedPosts from "../Components/Posts/FeedPosts";
 import FeedPostForm from "../Components/Posts/FeedPostForm";
 import Nav from "../Components/Nav";
-import { Divider } from "@mui/material";
+import AboutModal from "../Components/About/AboutModal";
 import FeedProfileCard from "../Components/FeedProfileCard";
 import FeedNewsCard from "../Components/FeedNewsCard";
 
@@ -15,9 +15,20 @@ import axios from "axios";
 const Feed = () => {
   const [userInfo, setUserInfo] = useState(null)
 
+  // Modal stuff
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
+
   const API = apiURL();
   const user = useSelector(selectUser);
-  console.log("THIS IS USER: ", user);
 
   useEffect(() => {
     const fetchCurrentUserInfo = async () => {
@@ -37,7 +48,7 @@ const Feed = () => {
   }, [user]);
   return (
     <>
-      <Nav />
+      <Nav handleOpen={handleOpen}/>
       <>
         <div
           className="row"
@@ -70,13 +81,6 @@ const Feed = () => {
                 textAlign: "-webkit-center",
               }}
             >
-              {/* <Divider
-                sx={{
-                  marginTop: "5%",
-                  background: "#5A5E5E"
-                }}
-                variant="middle"
-              /> */}
             </div>
           </div>
           <div
@@ -91,7 +95,8 @@ const Feed = () => {
             <FeedNewsCard />
           </div>
         </div>
-        <FeedPosts />
+        <FeedPosts userInfo={userInfo}/>
+        <AboutModal isOpen={isOpen} handleClose={handleClose}/>
       </>
     </>
   );

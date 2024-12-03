@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { recieveToken } from "../store/slices/user/tokenSlice";
 import { asyncLogout } from "../store/slices/user/userSlice";
 import { selectUser } from "../store/slices/user/userSlice";
+import whiteIcon from  "../styles/Logo/logo-white.png"
+
 
 import "../styles/Nav.css"
 
@@ -25,7 +27,8 @@ import {
 const pages = ["About"];
 const settings = ["Profile", "Logout"];
 
-const Nav = () => {
+
+const Nav = ({handleOpen}) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -41,6 +44,7 @@ const Nav = () => {
   };
 
   const handleCloseNavMenu = () => {
+    handleOpen()
     setAnchorElNav(null);
   };
 
@@ -62,21 +66,17 @@ const Nav = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
-              variant="h6"
               noWrap
-              component="a"
+              component="div"
               href="/feed"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
-                fontWeight: 700,
-                fontFamily: "monospace",
-                letterSpacing: ".3rem",
-                color: "#93E1D8",
-                textDecoration: "none",
               }}
             >
-              FAKEBOOK
+           <img src={whiteIcon} className="iconNav" style={{
+            height: "70px"
+           }} onClick={() => navigate("/feed")}/>
             </Typography>
 
             <Box>
@@ -98,7 +98,6 @@ const Nav = () => {
               >
                 <MenuItem
                   onClick={handleCloseNavMenu}
-                  to={"/about"}
                   component={NavLink}
                 >
                   <Typography
@@ -137,7 +136,6 @@ const Nav = () => {
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
-                  href={"/about"}
                 >
                   {page}
                 </Button>

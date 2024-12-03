@@ -1,3 +1,7 @@
 #postOwnerProfilePicture:hover {
     cursor: pointer;
 }
+
+.clearIcon:hover {
+    cursor: pointer;
+}

@@ -7,12 +7,14 @@ import { storage } from "../firebase";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 import { Card } from "@mui/material";
-
+import scrollmeicon from "../styles/Logo/scrollme2.png"
 import { TextField, Button, Link } from "@mui/material";
 // css
 import "../styles/SignUp.css";
 
 const mockImageUrl = "IMAGEURL";
+
+
 
 const SignUpForm = () => {
   const [fullName, setFullName] = useState("");
@@ -78,14 +80,18 @@ const SignUpForm = () => {
         height: "100vh",
         verticalAlign: "middle",
         textAlign: "-webkit-center",
+        paddingTop: "5%"
       }}
     >
       <Card sx={{
         width: "45%",
         paddingTop: "10px",
         top: "50%",
+        borderRadius: "25px"
       }}>
-        <h1>Sign Up</h1>
+          <img src={scrollmeicon} style={{
+            height: "200px"
+          }}/>
         <div className="signupFormContainer">
           <form onSubmit={handleSubmit} className="signupForm">
             <TextField
@@ -163,6 +169,8 @@ const SignUpForm = () => {
               className="submitButton"
               sx={{
                 margin: "5px",
+                color: "#FFFFFF",
+                background: "#2CA093",
               }}
             >
               Sign Up
@@ -170,7 +178,8 @@ const SignUpForm = () => {
           </form>
         </div>
         <div style={{
-          paddingBottom: "15px"
+          paddingBottom: "15px",
+          color: "#060E0D"
         }}>
 
 
