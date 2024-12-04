@@ -18,12 +18,13 @@ const style = {
 
 const DeletePostModal = ({ isOpen, handleClose, postId }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(deletePostAsync(postId));
-    navigate("/feed")
+    navigate("/feed");
+    window.location.reload();
   };
 
   return (

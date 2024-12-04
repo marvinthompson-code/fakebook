@@ -43,7 +43,7 @@ const SuggestedFriendsGrid = () => {
       }}> */}
         <Grid2 container spacing={2} sx={{
             width: "70%",
-            marginTop: "7px"
+            marginTop: "10px"
         }}>
           {suggestedFriends}
         </Grid2>

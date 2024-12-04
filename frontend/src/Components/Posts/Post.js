@@ -146,7 +146,8 @@ const Post = ({ post, userInfo }) => {
                   <Divider
                     sx={{
                       background: "#F5F5F5",
-                      marginTop: "5px",
+                      margin: "5px",
+                      width: "100%"
                     }}
                   />
                   <div

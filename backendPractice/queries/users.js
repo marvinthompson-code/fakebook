@@ -1,4 +1,4 @@
-const db = require("../db/index")
+const db = require("../db/index");
 
 const fetchAllUsers = async (req, res, next) => {
   try {
@@ -12,9 +12,9 @@ const fetchAllUsers = async (req, res, next) => {
     });
   } catch (err) {
     res.status(400).json({
-      message: `${err.message}`
-    })
-    next(err)
+      message: `${err.message}`,
+    });
+    next(err);
   }
 };
 
@@ -54,7 +54,7 @@ const deleteSingleUser = async (req, res, next) => {
     res.status(400).json({
       message: `Could not delete a user: ${err.message}`,
     });
-    next(err)
+    next(err);
   }
 };
 
@@ -79,9 +79,30 @@ const createNewUser = async (req, res, next) => {
   }
 };
 
+const editUser = async (req, res, next) => {
+  try {
+    let { id, username, bio } = req.body;
+    res.status(200).json({
+      status: "Success",
+      message: `Updated user: ${id}`,
+      body: await db.one(
+        "UPDATE users SET username = $2, bio = $3 WHERE id = $1 RETURNING *",
+        [id, username, bio]
+      ),
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Unsuccessful",
+      message: `Could not update user`,
+    });
+    next(err);
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   fetchSingleUserById,
   deleteSingleUser,
-  createNewUser
+  createNewUser,
+  editUser,
 };

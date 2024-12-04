@@ -78,9 +78,8 @@ const FeedProfileCard = ({ userInfo }) => {
                 {userInfo.bio}
               </Typography>
               <Divider
-                variant="inset"
                 sx={{
-                  marginTop: "5px",
+                  margin: "5px",
                   background: "#F5F5F5",
                 }}
               />
@@ -136,7 +135,7 @@ const FeedProfileCard = ({ userInfo }) => {
               </ul>
             </Box>
           </Card>
-          <EditProfileModal isOpen={isOpen} handleClose={handleClose}/>
+          <EditProfileModal isOpen={isOpen} handleClose={handleClose} userInfo={userInfo}/>
         </div>
       )}
     </>

@@ -1,4 +1,8 @@
 import { Box, Button, Typography, Modal, TextField } from "@mui/material";
+import { useState, useEffect } from "react";
+import { apiURL } from "../../util/apiURL";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -13,7 +17,33 @@ const style = {
   p: 4,
 };
 
-const EditProfileModal = ({ isOpen, handleClose }) => {
+const EditProfileModal = ({ isOpen, handleClose, userInfo }) => {
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+
+  const API = apiURL();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(`${API}/api/users/edit`, {
+        id: userInfo.id,
+        username,
+        bio,
+      });
+      debugger;
+      navigate("/feed");
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    setUsername(userInfo.username);
+    setBio(userInfo.bio);
+  }, []);
   return (
     <div>
       <Modal
@@ -30,43 +60,56 @@ const EditProfileModal = ({ isOpen, handleClose }) => {
           >
             Edit Profile
           </Typography>
-          <TextField sx={{
-            width: "100%",
-            margin: "5px"
-          }} placeholder="Edit Username*"/>
-          <TextField sx={{
-            width: "100%",
-            margin: "5px"
-          }} placeholder="Edit Bio*"/>
-          <Box
-            sx={{
-              justifyContent: "space-between",
-              textAlign: "center",
-              marginTop: "10px",
-            }}
-          >
-            <Button
+
+          <form>
+            <TextField
               sx={{
-                margin: "5px",
-                color: "#FFFFFF",
-                background: "#2CA093",
-              }}
-            >
-              Submit
-            </Button>
-            <Button
-              sx={{
+                width: "100%",
                 margin: "5px",
               }}
-              onClick={handleClose}
+              placeholder="Edit Username*"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              sx={{
+                width: "100%",
+                margin: "5px",
+              }}
+              placeholder="Edit Bio*"
+              onChange={(e) => setBio(e.target.value)}
+            />
+            <Box
+              sx={{
+                justifyContent: "space-between",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
             >
-              Back
-            </Button>
-          </Box>
+              <Button
+                sx={{
+                  margin: "5px",
+                  color: "#FFFFFF",
+                  background: "#2CA093",
+                }}
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button
+                sx={{
+                  margin: "5px",
+                }}
+                onClick={handleClose}
+              >
+                Back
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Modal>
     </div>
   );
 };
 
-export default EditProfileModal
+export default EditProfileModal;

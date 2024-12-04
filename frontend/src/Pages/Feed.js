@@ -10,6 +10,8 @@ import { apiURL } from "../util/apiURL";
 import { selectUser } from "../store/slices/user/userSlice";
 import { useSelector } from "react-redux";
 
+import { Divider } from "@mui/material";
+
 import axios from "axios";
 import SuggestedFriendsGrid from "../Components/SuggestedFriendsGrid";
 
@@ -80,7 +82,9 @@ const Feed = () => {
               style={{
                 textAlign: "-webkit-center",
               }}
-            ></div>
+            >
+              <Divider />
+            </div>
           </div>
           <div
             style={{
