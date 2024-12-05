@@ -13,7 +13,7 @@ const SuggestedFriendsGrid = () => {
       try {
         let res = await axios.get(`${API}/api/users`);
         setUsers(res.data.body.users);
-        debugger;
+       
       } catch (error) {
         console.log(`error.message`);
       }

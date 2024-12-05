@@ -12,7 +12,7 @@ const ProfileFeed = () => {
   const [posts, setPosts] = useState([]);
   const user = useSelector((state) => state.user);
   const newPosts = useSelector(selectPosts)
-  debugger;
+  
   console.log(newPosts)
 
   const API = apiURL();
@@ -31,7 +31,7 @@ const ProfileFeed = () => {
     const fetchUserPosts = async () => {
       try {
         let res = await axios.get(`${API}/api/posts/user/${match.params.id}`);
-        debugger
+        
         setPosts(res.data.body.posts);
       } catch (error) {
         console.log(error.message);

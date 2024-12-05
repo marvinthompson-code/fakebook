@@ -33,7 +33,7 @@ const ProfileHero = () => {
     const fetchUserInfo = async () => {
       try {
         let res = await axios.get(`${API}/api/users/${match.params.id}`);
-        debugger;
+        
         const { bio, full_name, username, email, profile_picture } =
           res.data.body.singleUser;
         setBio(bio);

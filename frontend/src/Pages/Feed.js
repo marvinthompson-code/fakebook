@@ -6,6 +6,8 @@ import AboutModal from "../Components/About/AboutModal";
 import FeedProfileCard from "../Components/FeedProfileCard";
 import FeedNewsCard from "../Components/FeedNewsCard";
 
+import "../styles/Feed.css"
+
 import { apiURL } from "../util/apiURL";
 import { selectUser } from "../store/slices/user/userSlice";
 import { useSelector } from "react-redux";
@@ -39,7 +41,7 @@ const Feed = () => {
           let res = await axios.get(`${API}/api/users/${user.id}`);
           const { singleUser } = res.data.body;
           setUserInfo(singleUser);
-          debugger;
+          
         }
       } catch (error) {
         console.log(error.message);
@@ -60,6 +62,7 @@ const Feed = () => {
           }}
         >
           <div
+          className="FeedProfileColumn"
             style={{
               width: "33.33%",
               float: "left",
@@ -76,6 +79,7 @@ const Feed = () => {
               display: "flex",
               flexDirection: "column",
             }}
+            className="FeedPostColumn"
           >
             <FeedPostForm userInfo={userInfo} />
             <div
@@ -94,10 +98,14 @@ const Feed = () => {
               flexDirection: "column",
               textAlign: "-webkit-center",
             }}
+            className="FeedNewsColumn"
           >
-            <div style={{}}>
+            <div >
               <FeedNewsCard />
+              <div className="SuggestedFriendsGrid">
               <SuggestedFriendsGrid />
+              </div>
+             
             </div>
           </div>
         </div>

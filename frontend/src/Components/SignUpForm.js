@@ -49,7 +49,7 @@ const SignUpForm = () => {
     try {
       if (confirmPassword === password) {
         let res = await signUp(email, password);
-        debugger;
+      
         console.log("Show user: ", res);
 
         const { uid } = res.user;
@@ -63,7 +63,7 @@ const SignUpForm = () => {
           bio,
         });
 
-        debugger;
+      
         dispatch(updateUser(res.user));
         navigate("/feed");
       } else {

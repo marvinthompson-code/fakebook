@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+    .FeedNewsColumn {
+        display: none !important;
+    }
+    .FeedProfileColumn {
+        display: none !important;
+    }
+    .row {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1026px) {
+    .SuggestedFriendsGrid {
+        display: none !important;
+    }
+}
+

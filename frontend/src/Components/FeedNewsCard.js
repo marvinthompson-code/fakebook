@@ -47,7 +47,7 @@ const FeedNewsCard = () => {
     <>
       <Box>
         <Card sx={{
-        width: "80%",
+        width: "70%",
         textAlign: "-webkit-center",
         marginTop: "10px",
         background: "#FFFFFF",

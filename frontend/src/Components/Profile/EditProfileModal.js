@@ -32,7 +32,7 @@ const EditProfileModal = ({ isOpen, handleClose, userInfo }) => {
         username,
         bio,
       });
-      debugger;
+      
       navigate("/feed");
       window.location.reload();
     } catch (error) {
@@ -56,6 +56,7 @@ const EditProfileModal = ({ isOpen, handleClose, userInfo }) => {
           <Typography
             sx={{
               color: "#2CA093",
+              margin: "15px"
             }}
           >
             Edit Profile

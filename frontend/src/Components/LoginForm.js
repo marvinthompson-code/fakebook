@@ -26,7 +26,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       let res = await login(email, password);
-      debugger;
+    
       dispatch(updateUser(res.user));
       setIsSuccess(true)
       navigate("/feed");
@@ -40,7 +40,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       let res = await login(guestEmail, guestPassword);
-      debugger;
+      
       dispatch(updateUser(res.user));
       navigate("/feed");
     } catch (error) {
